@@ -1,0 +1,18 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: podinfo-helm
+  namespace: ns2
+spec:
+  chart:
+    spec:
+      chart: podinfo # Must be the same as the upstream chart name
+      version: 6.x # Pin to semver major versions to avoid breaking changes but still get bugfixes/updates
+      sourceRef:
+        kind: HelmRepository
+        name: podinfo # References the HelmRepository you created earlier
+        namespace: flux-system # All HelmRepositories exist in the flux-system namespace
+  interval: 15m
+  timeout: 5m
+  releaseName: podinfo-helm # _may_ be different from the upstream chart name, but could cause confusion

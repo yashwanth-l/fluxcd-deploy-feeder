@@ -1,0 +1,45 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+
+metadata:
+  name: podinfo-app-matrix
+
+spec:
+  generators:
+  - matrix:
+      generators:
+      - git:
+          repoURL: https://gitlab.nortal.com/ylakkaraju/gitops/argocd-deploy-feeder.git
+          revision: main
+          directories:
+          - path: deploy-kustomize-appset-matrix/argocd-kind-k8s/*
+      - list:
+          elements:
+          - k8sNamepace: ns1
+            k8sUrl: https://kubernetes.default.svc
+          - k8sNamepace: ns2
+            k8sUrl: https://kubernetes.default.svc
+
+  template:
+    metadata:
+      name: '{{path.basename}}-{{k8sNamepace}}-argocd-matrix'
+    spec:
+      project: app-deploy
+      source:
+        repoURL: https://gitlab.nortal.com/ylakkaraju/gitops/argocd-deploy-feeder.git
+        targetRevision: main
+        path: '{{path}}'
+      destination:
+        server: '{{k8sUrl}}'
+        namespace: '{{k8sNamepace}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        retry:
+          limit: 5
+          backoff:
+            duration: 5s
+            maxDuration: 3m0s
+            factor: 2
