@@ -20,9 +20,9 @@ spec:
     spec:
       project: app-deploy
       source:
-        repoURL: https://gitlab.nortal.com/ylakkaraju/gitops/argocd-deploy-feeder.git
+        repoURL: https://github.com/yashwanth-l/argo-deploy-feeder.git
         targetRevision: main
-        path: deploy-kustomize-appset-list/argocd-kind-k8s/podinfo
+        path: deploy-kustomize-appset-list/argo-kind-k8s/podinfo
       destination:
         server: '{{k8sUrl}}'
         namespace: '{{k8sNamepace}}'
