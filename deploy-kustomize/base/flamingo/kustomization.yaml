@@ -4,12 +4,17 @@ kind: Kustomization
 namespace: argocd
 
 resources:
-- https://raw.githubusercontent.com/argoproj/argo-cd/v2.7.6/manifests/install.yaml
+- https://raw.githubusercontent.com/argoproj/argo-cd/v2.7.7/manifests/install.yaml
+- projects/app-deploy.yaml
+# - applications/ns1/podinfo-ns1.yaml
+# - applications/ns2/podinfo-ns2.yaml
+# - applicationsets/podinfo-matrix.yaml
+# - applicationsets/podinfo-list.yaml
 
 images:
-- name: quay.io/argoproj/argocd:v2.7.6
+- name: quay.io/argoproj/argocd:v2.7.7
   newName: ghcr.io/flux-subsystem-argo/fsa/argocd
-  newTag: v2.7.6-fl.15-main-52691a11
+  newTag: v2.7.7-fl.15-main-cdbce523
 
 patches:
 - path: config/remove-cm-argocd-cmd-params-cm.yaml
@@ -17,6 +22,6 @@ patches:
 configMapGenerator:
 - name: argocd-cmd-params-cm
   behavior: merge
-  literals: # https://github.com/argoproj/argo-cd/blob/v2.7.6/docs/operator-manual/argocd-cmd-params-cm.yaml
+  literals: # https://github.com/argoproj/argo-cd/blob/v2.7.7/docs/operator-manual/argocd-cmd-params-cm.yaml
   - server.insecure=false
 

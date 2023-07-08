@@ -9,9 +9,9 @@ spec:
   project: app-deploy
   source:
     # Path where the specific environment of the app exists
-    path: deploy-kustomize/argocd-kind-k8s/ns1/podinfo
+    path: deploy-kustomize/argo-kind-k8s/ns1/podinfo
     # Repo where the gitops repo exist
-    repoURL: https://gitlab.nortal.com/ylakkaraju/gitops/argocd-deploy-feeder.git
+    repoURL: https://github.com/yashwanth-l/argo-deploy-feeder.git
     # Branch of the Repo to use to sync
     targetRevision: main
   destination:

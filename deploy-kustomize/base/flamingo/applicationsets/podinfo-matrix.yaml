@@ -10,10 +10,10 @@ spec:
   - matrix:
       generators:
       - git:
-          repoURL: https://gitlab.nortal.com/ylakkaraju/gitops/argocd-deploy-feeder.git
+          repoURL: https://github.com/yashwanth-l/argo-deploy-feeder.git
           revision: main
           directories:
-          - path: deploy-kustomize-appset-matrix/argocd-kind-k8s/*
+          - path: deploy-kustomize-appset-matrix/argo-kind-k8s/*
       - list:
           elements:
           - k8sNamepace: ns1
@@ -27,7 +27,7 @@ spec:
     spec:
       project: app-deploy
       source:
-        repoURL: https://gitlab.nortal.com/ylakkaraju/gitops/argocd-deploy-feeder.git
+        repoURL: https://github.com/yashwanth-l/argo-deploy-feeder.git
         targetRevision: main
         path: '{{path}}'
       destination:
